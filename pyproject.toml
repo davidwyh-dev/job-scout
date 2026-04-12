@@ -14,7 +14,9 @@ dependencies = [
 [project.scripts]
 job-scout = "job_scout.main:main"
 
-[tool.uv]
-package = false
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.uv.sources]
+[tool.hatch.build.targets.wheel]
+packages = ["src/job_scout"]
