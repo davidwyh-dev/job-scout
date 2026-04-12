@@ -1,0 +1,86 @@
+search:
+  titles:
+    - "Product Manager"
+    - "Senior Product Manager"
+    - "Product Lead"
+    - "Head of Product"
+    - "Director of Product"
+    - "VP of Product"
+  title_exclude:
+    - "Technical Program Manager"
+    - "Project Manager"
+    - "Production Manager"
+    - "Product Designer"
+    - "Product Marketing"
+    - "Product Analyst"
+  locations:
+    - "New York"
+    - "NYC"
+    - "Brooklyn"
+  include_remote: true
+  hours_old: 48
+  results_per_source: 50
+
+sources:
+  jobspy:
+    enabled: true
+    sites:
+      - linkedin
+      - indeed
+      - glassdoor
+      - google
+  the_muse:
+    enabled: true
+    # API key from env: MUSE_API_KEY
+  adzuna:
+    enabled: true
+    # Credentials from env: ADZUNA_APP_ID, ADZUNA_APP_KEY
+
+# Companies to monitor directly via their ATS job boards.
+# Add/remove companies here as you discover them.
+ats_companies:
+  greenhouse:
+    - { board_token: "stripe", name: "Stripe" }
+    - { board_token: "airtable", name: "Airtable" }
+    - { board_token: "figma", name: "Figma" }
+    - { board_token: "anthropic", name: "Anthropic" }
+    - { board_token: "scaleai", name: "Scale AI" }
+    - { board_token: "databricks", name: "Databricks" }
+    - { board_token: "verkada", name: "Verkada" }
+  lever:
+    - { slug: "plaid", name: "Plaid" }
+  ashby:
+    - { slug: "ramp", name: "Ramp" }
+    - { slug: "vercel", name: "Vercel" }
+    - { slug: "linear", name: "Linear" }
+    - { slug: "mercury", name: "Mercury" }
+    - { slug: "notion", name: "Notion" }
+    - { slug: "openai", name: "OpenAI" }
+
+indirect_sources:
+  enabled: true
+  rss_feeds:
+    - url: "https://techcrunch.com/category/startups/feed/"
+      name: "TechCrunch Startups"
+    - url: "https://news.crunchbase.com/feed/"
+      name: "Crunchbase News"
+  funding_keywords:
+    - "Series A"
+    - "Series B"
+    - "Series C"
+    - "Series D"
+    - "raises"
+    - "funding round"
+    - "secures"
+    - "closes"
+
+email:
+  to: "davidwyh@gmail.com"
+  from: "deetothedubsie@gmail.com"
+  subject_prefix: "[Job Scout]"
+  max_jobs_per_email: 50
+  # SMTP password from env: GMAIL_APP_PASSWORD
+
+state:
+  file: "data/sent_jobs.json"
+  max_age_days: 30
