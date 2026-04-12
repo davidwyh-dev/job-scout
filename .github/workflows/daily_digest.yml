@@ -16,13 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
+      - uses: astral-sh/setup-uv@v4
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: uv sync --frozen
 
       - name: Run Job Scout
         env:
@@ -30,8 +27,7 @@ jobs:
           MUSE_API_KEY: ${{ secrets.MUSE_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
-          PYTHONPATH: src
-        run: python -m job_scout.main -v
+        run: uv run python -m job_scout.main -v
 
       - name: Commit updated state
         run: |
