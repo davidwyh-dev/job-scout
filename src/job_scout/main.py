@@ -44,21 +44,6 @@ def _build_sources(config: AppConfig) -> list[BaseSource]:
         from job_scout.sources.ashby import AshbySource
         sources.append(AshbySource(ashby_companies))
 
-    # The Muse
-    muse_cfg = config.sources.get("the_muse", {})
-    if muse_cfg.get("enabled", False):
-        from job_scout.sources.the_muse import TheMuseSource
-        sources.append(TheMuseSource(api_key=muse_cfg.get("api_key", "")))
-
-    # Adzuna
-    adzuna_cfg = config.sources.get("adzuna", {})
-    if adzuna_cfg.get("enabled", False):
-        from job_scout.sources.adzuna import AdzunaSource
-        sources.append(AdzunaSource(
-            app_id=adzuna_cfg.get("app_id", ""),
-            app_key=adzuna_cfg.get("app_key", ""),
-        ))
-
     return sources
 
 
