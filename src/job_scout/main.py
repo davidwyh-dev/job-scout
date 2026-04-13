@@ -189,6 +189,15 @@ def main() -> None:
     all_jobs = [j for j in all_jobs if _matches_title(j, config.search)]
     logger.info("After title filter: %d", len(all_jobs))
 
+    if config.search.exclude_public_companies or config.search.company_exclude:
+        from job_scout.public_company_filter import PublicCompanyChecker
+        checker = PublicCompanyChecker(config.search.company_exclude, state)
+        all_jobs = [j for j in all_jobs if not checker.is_excluded(
+            j.company, use_api=config.search.exclude_public_companies
+        )]
+        checker.flush_cache()
+        logger.info("After public/excluded company filter: %d", len(all_jobs))
+
     all_jobs = deduplicate(all_jobs)
     logger.info("After dedup: %d", len(all_jobs))
 

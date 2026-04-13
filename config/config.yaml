@@ -18,6 +18,8 @@ search:
     - "NYC"
     - "Brooklyn"
   include_remote: true
+  exclude_public_companies: true
+  company_exclude: []
   hours_old: 48
   results_per_source: 50
 

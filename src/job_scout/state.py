@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class StateManager:
     def __init__(self, file_path: str) -> None:
         self._path = Path(file_path)
-        self._data: dict = {"sent_jobs": {}, "last_run": None, "discovered_ats_boards": {}}
+        self._data: dict = {"sent_jobs": {}, "last_run": None, "discovered_ats_boards": {}, "public_company_cache": {}}
         self._load()
 
     def _load(self) -> None:
@@ -26,6 +26,7 @@ class StateManager:
         self._data.setdefault("sent_jobs", {})
         self._data.setdefault("last_run", None)
         self._data.setdefault("discovered_ats_boards", {})
+        self._data.setdefault("public_company_cache", {})
 
     def save(self) -> None:
         self._data["last_run"] = datetime.now(timezone.utc).isoformat()
@@ -70,3 +71,12 @@ class StateManager:
     @property
     def all_discovered_boards(self) -> list[dict]:
         return list(self._data.get("discovered_ats_boards", {}).values())
+
+    # --- Public company cache ---
+
+    @property
+    def public_company_cache(self) -> dict[str, bool]:
+        return self._data.get("public_company_cache", {})
+
+    def update_public_company_cache(self, cache: dict[str, bool]) -> None:
+        self._data.setdefault("public_company_cache", {}).update(cache)

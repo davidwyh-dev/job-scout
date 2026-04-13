@@ -15,6 +15,8 @@ class SearchConfig:
     include_remote: bool
     hours_old: int
     results_per_source: int
+    exclude_public_companies: bool = False
+    company_exclude: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -52,6 +54,8 @@ def load_config(path: str | None = None) -> AppConfig:
         include_remote=raw["search"].get("include_remote", True),
         hours_old=raw["search"].get("hours_old", 48),
         results_per_source=raw["search"].get("results_per_source", 50),
+        exclude_public_companies=raw["search"].get("exclude_public_companies", False),
+        company_exclude=raw["search"].get("company_exclude", []),
     )
 
     email_cfg = raw["email"]
